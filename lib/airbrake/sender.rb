@@ -156,10 +156,11 @@ module Airbrake
       http.open_timeout = http_open_timeout
 
       if secure?
-        http.use_ssl     = true
-
+        http.use_ssl      = true
         http.ca_file      = Airbrake.configuration.ca_bundle_path
         http.verify_mode  = OpenSSL::SSL::VERIFY_PEER
+        http.cert         = Airbrake.configuration.cert
+        http.key          = Airbrake.configuration.key
       else
         http.use_ssl     = false
       end

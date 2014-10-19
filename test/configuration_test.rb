@@ -80,6 +80,8 @@ class ConfigurationTest < Test::Unit::TestCase
     assert_config_overridable :proxy_user
     assert_config_overridable :proxy_pass
     assert_config_overridable :secure
+    assert_config_overridable :cert
+    assert_config_overridable :key
     assert_config_overridable :host
     assert_config_overridable :port
     assert_config_overridable :http_open_timeout

@@ -25,6 +25,8 @@ class SenderTest < Test::Unit::TestCase
                 :read_timeout= => nil,
                 :open_timeout= => nil,
                 :ca_file=      => nil,
+                :cert=         => nil,
+                :key=          => nil,
                 :verify_mode=  => nil,
                 :use_ssl=      => nil)
     Net::HTTP.stubs(:new => http)

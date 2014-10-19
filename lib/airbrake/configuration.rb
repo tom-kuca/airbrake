@@ -24,6 +24,15 @@ module Airbrake
     # +true+ for https connections, +false+ for http connections.
     attr_accessor :secure
 
+    # Certificate authority which verifies server certificate 
+    attr_accessor :ca_cert_path
+
+    # Private key for client's certificate 
+    attr_accessor :key
+
+    # Client certificate sent to server with request
+    attr_accessor :cert
+
     # +true+ to use whatever CAs OpenSSL has installed on your system. +false+ to use the ca-bundle.crt file included in Airbrake itself (reccomended and default)
     attr_accessor :use_system_ssl_cert_chain
 
@@ -155,6 +164,9 @@ module Airbrake
     def initialize
       @secure                   = false
       @use_system_ssl_cert_chain= false
+      @ca_cert                  = nil
+      @cert                     = nil
+      @key                      = nil
       @host                     = 'api.airbrake.io'
       @port                     = nil
       @http_open_timeout        = 2
@@ -308,6 +320,8 @@ module Airbrake
     def ca_bundle_path
       if use_system_ssl_cert_chain? && File.exist?(OpenSSL::X509::DEFAULT_CERT_FILE)
         OpenSSL::X509::DEFAULT_CERT_FILE
+      elsif @ca_cert_path
+        @ca_cert_path
       else
         local_cert_path # ca-bundle.crt built from source, see resources/README.md
       end

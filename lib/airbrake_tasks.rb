@@ -45,6 +45,8 @@ module AirbrakeTasks
       http.use_ssl      = true
       http.ca_file      = Airbrake.configuration.ca_bundle_path
       http.verify_mode  = OpenSSL::SSL::VERIFY_PEER
+      http.cert         = Airbrake.configuration.cert
+      http.key          = Airbrake.configuration.key
     end
 
     post = Net::HTTP::Post.new("/deploys.txt")
